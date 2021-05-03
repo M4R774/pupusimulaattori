@@ -8,9 +8,11 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     // Basic stats
     [SerializeField] private float health = 100;
     [SerializeField] private Slider health_bar;
+    [SerializeField] private float max_energy_storages = 100;
     [SerializeField] private float energy_storages = 100;
     [SerializeField] private Slider hunger_bar;
     [SerializeField] private float hunger_drain_interval = 1;
+    public float vision_range = 10;
     private float time_for_hunger_decrease;
 
     // Movement variables
@@ -18,6 +20,7 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     private float distance_to_ground;
     [SerializeField] private Vector3 movement_target;
     [SerializeField] private float jump_strength = 3;
+    [SerializeField] private float jump_cooldown;
 
     void Start()
     {
@@ -55,9 +58,15 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
         }
     }
 
+    public void EatFromFoodSource(IEdible food_source)
+    {
+        Feed(food_source.Eat(1));
+    }
+
     public void Feed(float kilocalories)
     {
         // TODO: Play feeding sound/animation/effect
+        // TODO: Checks for overfeeding
         energy_storages += kilocalories;
     }
 
@@ -85,8 +94,9 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
 
     private void Move()
     {
-        if (IsGrounded() && Vector3.Distance(transform.position, movement_target) > 1)
+        if (IsGrounded() && Vector3.Distance(transform.position, movement_target) > .5f && Time.time > jump_cooldown)
         {
+            jump_cooldown += .5f;
             Vector3 jump_direction = Vector3.Normalize(movement_target - transform.position);
             jump_direction = Vector3.Normalize(jump_direction + Vector3.up);
             rb.velocity = jump_direction * jump_strength;
@@ -97,5 +107,10 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distance_to_ground + 0.1f);
+    }
+
+    public float GetFoodSaturation()
+    {
+        return energy_storages / max_energy_storages * 100;
     }
 }

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RabbitMovementController : AnimalMovementController
+public class Grass : Plant
 {
 
 }
+

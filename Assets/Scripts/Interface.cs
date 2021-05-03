@@ -14,6 +14,7 @@ public interface IKillable
 
 public interface IHasHunger
 {
+    public float GetFoodSaturation();
     public void Feed(float kilocalories);
     public void Consume(float kilocalories);
 }
@@ -22,4 +23,13 @@ public interface ICanMove
 {
     public void MoveToDirection(Vector3 movement_direction);
     public void MoveTowardsCoordinates(Vector3 target_coordinates);
+}
+
+public interface IEdible
+{
+    public float Eat(float bite_size);
+    public bool HasSomethingToEat();
+    public float GetNutritionPercentage();
+    public float Attractiveness();
+    public Vector3 GetPosition();
 }
