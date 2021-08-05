@@ -14,7 +14,7 @@ public interface IKillable
 
 public interface IHasHunger
 {
-    public float GetFoodSaturation();
+    public float GetFoodSaturationPercentage();
     public void Feed(float kilocalories);
     public void Consume(float kilocalories);
 }
@@ -30,6 +30,7 @@ public interface IEdible
     public float Eat(float bite_size);
     public bool HasSomethingToEat();
     public float GetNutritionPercentage();
-    public float Attractiveness();
+    public float GetNutritionValue();
     public Vector3 GetPosition();
+    public int GetID();
 }

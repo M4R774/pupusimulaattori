@@ -15,8 +15,9 @@ public abstract class AnimalAI : MonoBehaviour
     private float next_idle_movement_time;
 
     // Food movement
-    private IEdible food_target;
+    private GameObject food_target;
     private float next_food_movement_time;
+    private float food_consumption_on_movement = 1.2f;
 
     enum Status
     {
@@ -78,17 +79,18 @@ public abstract class AnimalAI : MonoBehaviour
 
     private void Eat()
     {
-        if (animal.GetFoodSaturation() >= 100)
+        if (animal.GetFoodSaturationPercentage() >= 100)
         {
             status = Status.idle;
+            next_idle_movement_time = Time.time + 1 + UnityEngine.Random.Range(0, 5);
         }
-        else if (food_target.GetNutritionPercentage() <= 0)
+        else if (food_target.GetComponent<IEdible>().GetNutritionPercentage() <= 0)
         {
             status = Status.looking_for_food;
         }
         else
         {
-            animal.EatFromFoodSource(food_target);
+            animal.EatFromFoodSource(food_target.GetComponent<IEdible>());
         }
     }
 
@@ -99,7 +101,7 @@ public abstract class AnimalAI : MonoBehaviour
 
     private void LookForFood()
     {
-        IEdible nearby_food_source = GetNearbyFoodSource();
+        GameObject nearby_food_source = GetNearbyFoodSource();
         if (nearby_food_source != null)
         {
             food_target = nearby_food_source;
@@ -112,20 +114,26 @@ public abstract class AnimalAI : MonoBehaviour
         }
     }
 
-    private IEdible GetNearbyFoodSource()
+    private GameObject GetNearbyFoodSource()
     {
         int layer_mask = 1 << 3;  // Layer 3 = Edibles
         Collider[] edibles_in_vision_range = Physics.OverlapSphere(transform.position, animal.vision_range, layer_mask, QueryTriggerInteraction.Collide);
-        List<Collider> sorted_edibles_list = edibles_in_vision_range.OrderByDescending(edible => edible.GetComponent<IEdible>().Attractiveness()).ToList();
+        List<Collider> sorted_edibles_list = edibles_in_vision_range.OrderByDescending(edible => CalculateFoodSourceAttractiviness(edible.GetComponent<IEdible>())).ToList();
         foreach (Collider edible_collider in sorted_edibles_list)
         {
             if (edible_collider.GetComponent<IEdible>().HasSomethingToEat())
             {
-                return edible_collider.GetComponent<IEdible>();
+                return edible_collider.gameObject;
             }
         }
         // TODO: return most attractive food source
         return null;
+    }
+
+    private float CalculateFoodSourceAttractiviness(IEdible food_source)
+    {
+        float distance_to_food_source = Vector3.Distance(transform.position, food_source.GetPosition());
+        return food_source.GetNutritionValue() - distance_to_food_source * food_consumption_on_movement;
     }
 
     private void MoveTowardsFood()
@@ -133,9 +141,16 @@ public abstract class AnimalAI : MonoBehaviour
         if (Time.time > next_food_movement_time)
         {
             next_food_movement_time += 1;
-            animal.MoveTowardsCoordinates(food_target.GetPosition());
-            
-            if (Vector3.Distance(transform.position, food_target.GetPosition()) < 1f)
+            if (food_target != null)
+            {
+                animal.MoveTowardsCoordinates(food_target.GetComponent<IEdible>().GetPosition());
+            }
+            else
+            {
+                status = Status.looking_for_food;
+                return;
+            }
+            if (Vector3.Distance(transform.position, food_target.GetComponent<IEdible>().GetPosition()) < 1f)
             {
                 status = Status.eating;
             }
@@ -155,7 +170,7 @@ public abstract class AnimalAI : MonoBehaviour
             Vector3 movement_target = transform.position + movement_vector;
             animal.MoveTowardsCoordinates(movement_target);
         }
-        if (animal.GetFoodSaturation() < 80)
+        if (animal.GetFoodSaturationPercentage() < 80)
         {
             status = Status.looking_for_food;
         }

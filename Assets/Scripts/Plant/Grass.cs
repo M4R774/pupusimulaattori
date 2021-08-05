@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Grass : Plant
 {
-
+    public new const int id = 1;
 }
 

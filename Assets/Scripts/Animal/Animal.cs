@@ -11,7 +11,7 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     [SerializeField] private float max_energy_storages = 100;
     [SerializeField] private float energy_storages = 100;
     [SerializeField] private Slider hunger_bar;
-    [SerializeField] private float hunger_drain_interval = 1;
+    [SerializeField] private float hunger_drain_interval = 10;
     public float vision_range = 10;
     private float time_for_hunger_decrease;
 
@@ -21,9 +21,11 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     [SerializeField] private Vector3 movement_target;
     [SerializeField] private float jump_strength = 3;
     [SerializeField] private float jump_cooldown;
+    private float next_reproduction_time;
 
-    void Start()
+    void Awake()
     {
+        next_reproduction_time = Time.time + 60;
         rb = GetComponent<Rigidbody>();
         distance_to_ground = GetComponent<Collider>().bounds.extents.y;
     }
@@ -35,6 +37,11 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
         {
             time_for_hunger_decrease = Time.time + hunger_drain_interval;
             Consume(1);
+        }
+
+        if (GetFoodSaturationPercentage() > 95 && Time.time > next_reproduction_time)
+        {
+            Reproduce();
         }
 
         // Update health bars
@@ -109,8 +116,42 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
         return Physics.Raycast(transform.position, -Vector3.up, distance_to_ground + 0.1f);
     }
 
-    public float GetFoodSaturation()
+    public float GetFoodSaturationPercentage()
     {
         return energy_storages / max_energy_storages * 100;
+    }
+
+    private void Reproduce()
+    {
+        try
+        {
+            Vector3 suitable_spawning_location = FindSuitableSpawningLocation();
+            GameObject child = Instantiate(gameObject, suitable_spawning_location, Quaternion.identity);
+        }
+        catch (NoSuitableSpawnLocationFound)
+        {
+
+        }
+        next_reproduction_time = Time.time + 60 + UnityEngine.Random.Range(-5f, 5f);
+    }
+
+    private Vector3 FindSuitableSpawningLocation()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 random_element = new Vector3(UnityEngine.Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
+            Vector3 spawn_location_candidate = random_element + transform.position;
+            int layer_mask = 1 << 6;  // Layer 6 = Animals
+            Collider[] edibles_in_spawn_location_candidate = Physics.OverlapSphere(spawn_location_candidate, 1, layer_mask, QueryTriggerInteraction.Collide);
+            if (edibles_in_spawn_location_candidate.Length > 0)
+            {
+                continue;
+            }
+            else
+            {
+                return spawn_location_candidate;
+            }
+        }
+        throw (new NoSuitableSpawnLocationFound("No suitable spawn location found."));
     }
 }
