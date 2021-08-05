@@ -15,6 +15,8 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     [SerializeField] private float hunger_drain_interval = 10;
     public float vision_range = 10;
     private float time_for_hunger_decrease;
+    [SerializeField] GameObject child; // Prefab to instantiate
+    [SerializeField] int reproductionInterval = 60; // Time between reproduction made avalaible in editor
 
     // Movement variables
     private Rigidbody rb;
@@ -127,13 +129,14 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
         try
         {
             Vector3 suitable_spawning_location = FindSuitableSpawningLocation();
-            GameObject child = Instantiate(gameObject, suitable_spawning_location, Quaternion.identity);
+            //GameObject child = Instantiate(gameObject, suitable_spawning_location, Quaternion.identity);
+            Instantiate(child, suitable_spawning_location, Quaternion.identity);
         }
         catch (NoSuitableSpawnLocationFound)
         {
 
         }
-        next_reproduction_time = Time.time + 60 + UnityEngine.Random.Range(-5f, 5f);
+        next_reproduction_time = Time.time + reproductionInterval + UnityEngine.Random.Range(-5f, 5f);
     }
 
     private Vector3 FindSuitableSpawningLocation()

@@ -431,7 +431,8 @@ MonoBehaviour:
   energy_storages: 100
   hunger_bar: {fileID: 8228583762393489567}
   hunger_drain_interval: 1
-  vision_range: 10
+  vision_range: 15
+  child: {fileID: 5904621374386426140}
   movement_target: {x: 0, y: 0, z: 0}
   jump_strength: 3
   jump_cooldown: 0

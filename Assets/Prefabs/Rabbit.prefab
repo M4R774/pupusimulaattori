@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6703876862481161605}
   - component: {fileID: 5264213836163371428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Health_bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 292024673518903358}
   - component: {fileID: 7711685417403434240}
   - component: {fileID: 923741237090973686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 1609694806812346556}
   - component: {fileID: 1609694806812346558}
   - component: {fileID: 1609694806812346559}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 7398106452895305391}
   - component: {fileID: 947760489943254389}
   - component: {fileID: 2082764076844534259}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rabbit
   m_TagString: Animal
   m_Icon: {fileID: 0}
@@ -343,6 +343,8 @@ MonoBehaviour:
   hunger_bar: {fileID: 3861388539712019671}
   hunger_drain_interval: 1
   vision_range: 15
+  child: {fileID: 1609694806902386004}
+  reproductionInterval: 45
   movement_target: {x: 0, y: 0, z: 0}
   jump_strength: 3
   jump_cooldown: 0
@@ -387,7 +389,7 @@ GameObject:
   - component: {fileID: 2255601550738726066}
   - component: {fileID: 2418616821475898538}
   - component: {fileID: 4064917270712064139}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7604900158604316401}
   - component: {fileID: 3861388539712019671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hunger_bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4734699009707028436}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +590,7 @@ GameObject:
   - component: {fileID: 8515363306066619910}
   - component: {fileID: 1291217163829899860}
   - component: {fileID: 5397043503717891644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Healthbars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +690,7 @@ GameObject:
   - component: {fileID: 28052318924628790}
   - component: {fileID: 1688977470754412169}
   - component: {fileID: 4377985963381966580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7325164795087420469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +801,7 @@ GameObject:
   - component: {fileID: 2386911112629306183}
   - component: {fileID: 712987350727249439}
   - component: {fileID: 7559569190058566529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
