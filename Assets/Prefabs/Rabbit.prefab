@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 1609694806902386000}
   - component: {fileID: 7398106452895305391}
   - component: {fileID: 947760489943254389}
+  - component: {fileID: 2082764076844534259}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Animal
@@ -336,7 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11085f3ba98b92e4284740203cdd2b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   health_bar: {fileID: 5264213836163371428}
   max_energy_storages: 100
   energy_storages: 100
@@ -360,6 +360,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animal: {fileID: 0}
   status: 0
+--- !u!114 &2082764076844534259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609694806902386004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83e399017f1639429534ea0ca1327bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animal: {fileID: 7398106452895305391}
+  health: 100
+  nutrition: 0
+  next_growth_time: 0
 --- !u!1 &2358881940886419392
 GameObject:
   m_ObjectHideFlags: 0
