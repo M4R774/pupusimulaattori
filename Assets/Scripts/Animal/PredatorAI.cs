@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-public abstract class AnimalAI : MonoBehaviour
+public abstract class PredatorAI : MonoBehaviour
 {
     [SerializeField] Animal animal;
     [SerializeField] Status status;
@@ -115,7 +115,7 @@ public abstract class AnimalAI : MonoBehaviour
 
     private IEdible GetNearbyFoodSource()
     {
-        int layer_mask = 1 << 3;  // Layer 3 = Edibles
+        int layer_mask = 1 << 6;  // Layer 6 = Herbivore
         Collider[] edibles_in_vision_range = Physics.OverlapSphere(transform.position, animal.vision_range, layer_mask, QueryTriggerInteraction.Collide);
         List<Collider> sorted_edibles_list = edibles_in_vision_range.OrderByDescending(edible => edible.GetComponent<IEdible>().Attractiveness()).ToList();
         foreach (Collider edible_collider in sorted_edibles_list)

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger, ICanMove
 {
     // Basic stats
-    [SerializeField] private float health = 100;
+    //[SerializeField] private float health = 100;
+    public float health {get; private set;} = 100;
     [SerializeField] private Slider health_bar;
     [SerializeField] private float max_energy_storages = 100;
     [SerializeField] private float energy_storages = 100;
