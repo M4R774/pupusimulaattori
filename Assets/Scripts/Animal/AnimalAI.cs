@@ -5,8 +5,13 @@ using System.Collections.Generic;
 
 public abstract class AnimalAI : MonoBehaviour
 {
+    [Header("General")]
+    [SerializeField] bool isPredator; // Attempt to make this script usable for foxes as well
     [SerializeField] Animal animal;
     [SerializeField] Status status;
+    [Header("Animation")]
+    [SerializeField] Animator animator = null;
+    [SerializeField] string currentAnimation = null; // We use this to deactive bools when switching animations
 
     // Idle movement
     private Rigidbody rb;
@@ -29,11 +34,23 @@ public abstract class AnimalAI : MonoBehaviour
         looking_for_food,
         idle
     }
+    enum AnimationParameters
+    {
+        isWalking,
+        isIdle,
+        isLove,
+        isDead
+    }
 
     private void Start()
     {
         animal = GetComponent<Animal>();
         status = Status.idle;
+
+        if(animator == null)
+            animator = GetComponentInChildren<Animator>();
+        currentAnimation = AnimationParameters.isIdle.ToString();
+        animator.SetBool(currentAnimation, true);
     }
 
     private void FixedUpdate() 
@@ -84,15 +101,25 @@ public abstract class AnimalAI : MonoBehaviour
         {
             status = Status.idle;
             next_idle_movement_time = Time.time + 1 + UnityEngine.Random.Range(0, 5);
+
         }
-        else if (food_target.GetComponent<IEdible>().GetNutritionPercentage() <= 0)
+        else if (food_target == null || food_target.GetComponent<IEdible>().GetNutritionPercentage() <= 0) // or here fixes error when food_target (rabbit gameobject) is destroyed
+        {
+            status = Status.looking_for_food;
+        }
+        else if(food_target != null)
+        {
+            animal.EatFromFoodSource(food_target.GetComponent<IEdible>());
+        }
+        /*else if (food_target.GetComponent<IEdible>().GetNutritionPercentage() <= 0)
         {
             status = Status.looking_for_food;
         }
         else
         {
             animal.EatFromFoodSource(food_target.GetComponent<IEdible>());
-        }
+            // TO DO implement eat animation
+        }*/
     }
 
     private void Attack()
@@ -118,6 +145,8 @@ public abstract class AnimalAI : MonoBehaviour
     private GameObject GetNearbyFoodSource()
     {
         int layer_mask = 1 << 3;  // Layer 3 = Edibles
+        if(isPredator)
+            layer_mask = 1 << 6; // Layer 3 = Animal
         Collider[] edibles_in_vision_range = Physics.OverlapSphere(transform.position, animal.vision_range, layer_mask, QueryTriggerInteraction.Collide);
         List<Collider> sorted_edibles_list = edibles_in_vision_range.OrderByDescending(edible => CalculateFoodSourceAttractiviness(edible.GetComponent<IEdible>())).ToList();
         foreach (Collider edible_collider in sorted_edibles_list)
@@ -139,6 +168,8 @@ public abstract class AnimalAI : MonoBehaviour
 
     private void MoveTowardsFood()
     {
+        SetAnimation(AnimationParameters.isWalking);
+
         if (Time.time > next_food_movement_time)
         {
             next_food_movement_time += 1;
@@ -160,6 +191,8 @@ public abstract class AnimalAI : MonoBehaviour
 
     private void Idle()
     {
+        SetAnimation(AnimationParameters.isIdle);
+
         if (Time.time > next_idle_movement_time)
         {
             next_idle_movement_time += movement_cd + UnityEngine.Random.Range(-movement_cd, movement_cd);
@@ -174,6 +207,16 @@ public abstract class AnimalAI : MonoBehaviour
         if (animal.GetFoodSaturationPercentage() < 80)
         {
             status = Status.looking_for_food;
+        }
+    }
+
+    private void SetAnimation(AnimationParameters animPar)
+    {
+        if(animPar.ToString() != currentAnimation)
+        {
+            animator.SetBool(currentAnimation, false);
+            currentAnimation = animPar.ToString();
+            animator.SetBool(currentAnimation, true);
         }
     }
 }

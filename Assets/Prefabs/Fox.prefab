@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 84909764535293972}
   - component: {fileID: 6529740903131601379}
   - component: {fileID: 3673046853860634836}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Love Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5170,7 +5170,7 @@ GameObject:
   - component: {fileID: 5904621374386426143}
   m_Layer: 0
   m_Name: Fox
-  m_TagString: Untagged
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5255,8 +5255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3d936128b29ca4593a63f760895585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPredator: 1
   animal: {fileID: 5904621374386426142}
   status: 0
+  animator: {fileID: 0}
+  currentAnimation: 
 --- !u!1 &5904621374623266037
 GameObject:
   m_ObjectHideFlags: 0

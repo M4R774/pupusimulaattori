@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
+ [Obsolete("Method is obsolete.", true)]
 public abstract class PredatorAI : MonoBehaviour
 {
     [SerializeField] Animal animal;

@@ -373,20 +373,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 1609694806812346557, guid: db69258fd730f134795cf8219c32abac,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1609694806902386004, guid: db69258fd730f134795cf8219c32abac,
         type: 3}
       propertyPath: m_Name
       value: Rabbit
-      objectReference: {fileID: 0}
-    - target: {fileID: 1609694806902386004, guid: db69258fd730f134795cf8219c32abac,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1793913442206144813, guid: db69258fd730f134795cf8219c32abac,
         type: 3}
@@ -801,10 +791,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1214343706796541389, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217141408504130208, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414361405442735666, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3569948167463064142, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704495829575121690, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4875955675755191414, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
         type: 3}
@@ -814,6 +824,16 @@ PrefabInstance:
     - target: {fileID: 4875955675755191414, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326984499322604775, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684785930926255507, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5904621374386426140, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
@@ -886,6 +906,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7429755890863967112, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606115782787095996, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777627439741286610, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911126312147106715, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12cfa1a7e1ca6ae4db030344ced18bca, type: 3}
 --- !u!1 &963194225
@@ -900,6 +940,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -985,6 +1026,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c037e2225a8c14542bd503b66688a84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 1
+  camera: {fileID: 963194227}
+  target: {fileID: 0}
 --- !u!1 &995544175
 GameObject:
   m_ObjectHideFlags: 0
