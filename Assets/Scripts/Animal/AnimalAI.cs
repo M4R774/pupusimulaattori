@@ -10,16 +10,15 @@ public abstract class AnimalAI : MonoBehaviour
     [SerializeField] Animal animal;
     [SerializeField] Status status;
     [Header("Animation")]
-    [SerializeField] Animator animator = null;
-    [SerializeField] string currentAnimation = null; // We use this to deactive bools when switching animations
+    [SerializeField] AnimalAnimation animalAnimation;
 
-    // Idle movement
+    [Header("Idle movement")]
     private Rigidbody rb;
     private const float movement_radius = 5;
     private const float movement_cd = 10;
     private float next_idle_movement_time;
 
-    // Food movement
+    [Header("Food movement")]
     private GameObject food_target;
     private float next_food_movement_time;
     private float food_consumption_on_movement = 1.2f;
@@ -34,23 +33,11 @@ public abstract class AnimalAI : MonoBehaviour
         looking_for_food,
         idle
     }
-    enum AnimationParameters
-    {
-        isWalking,
-        isIdle,
-        isLove,
-        isDead
-    }
 
     private void Start()
     {
         animal = GetComponent<Animal>();
         status = Status.idle;
-
-        if(animator == null)
-            animator = GetComponentInChildren<Animator>();
-        currentAnimation = AnimationParameters.isIdle.ToString();
-        animator.SetBool(currentAnimation, true);
     }
 
     private void FixedUpdate() 
@@ -129,6 +116,8 @@ public abstract class AnimalAI : MonoBehaviour
 
     private void LookForFood()
     {
+        animalAnimation.SetAnimation(AnimationParameters.isWalking);
+        
         GameObject nearby_food_source = GetNearbyFoodSource();
         if (nearby_food_source != null)
         {
@@ -168,7 +157,7 @@ public abstract class AnimalAI : MonoBehaviour
 
     private void MoveTowardsFood()
     {
-        SetAnimation(AnimationParameters.isWalking);
+        animalAnimation.SetAnimation(AnimationParameters.isWalking);
 
         if (Time.time > next_food_movement_time)
         {
@@ -191,7 +180,7 @@ public abstract class AnimalAI : MonoBehaviour
 
     private void Idle()
     {
-        SetAnimation(AnimationParameters.isIdle);
+        animalAnimation.SetAnimation(AnimationParameters.isIdle);
 
         if (Time.time > next_idle_movement_time)
         {
@@ -210,13 +199,4 @@ public abstract class AnimalAI : MonoBehaviour
         }
     }
 
-    private void SetAnimation(AnimationParameters animPar)
-    {
-        if(animPar.ToString() != currentAnimation)
-        {
-            animator.SetBool(currentAnimation, false);
-            currentAnimation = animPar.ToString();
-            animator.SetBool(currentAnimation, true);
-        }
-    }
 }

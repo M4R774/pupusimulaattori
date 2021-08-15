@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger, ICanMove
 {
-    // Basic stats
-    //[SerializeField] private float health = 100;
-    public float health {get; private set;} = 100;
+    [Header("Basic stats")]
+    [SerializeField] private float animalHealth = 100;
+    public float health {get; private set;} = 100; // This one gets eaten away by other animals
     [SerializeField] private Slider health_bar;
     [SerializeField] private float max_energy_storages = 100;
     [SerializeField] private float energy_storages = 100;
@@ -17,8 +17,9 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     private float time_for_hunger_decrease;
     [SerializeField] GameObject child; // Prefab to instantiate
     [SerializeField] int reproductionInterval = 60; // Time between reproduction made avalaible in editor
+    private Coroutine deathCoroutine = null;
 
-    // Movement variables
+    [Header("Movement variables")]
     private Rigidbody rb;
     private float distance_to_ground;
     [SerializeField] private Vector3 movement_target;
@@ -26,11 +27,21 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     [SerializeField] private float jump_cooldown;
     private float next_reproduction_time;
 
+    [Header("Animation")]
+    [SerializeField] AnimalAnimation animalAnimation;
+
     void Awake()
     {
         next_reproduction_time = Time.time + 60;
         rb = GetComponent<Rigidbody>();
         distance_to_ground = GetComponent<Collider>().bounds.extents.y;
+
+        health = animalHealth;
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+            Kill();
     }
 
 
@@ -56,7 +67,11 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
 
     public void Kill()
     {
-        Destroy(this.gameObject);
+        if(deathCoroutine == null)
+        {
+            animalAnimation.SetAnimation(AnimationParameters.isDead);
+            deathCoroutine = StartCoroutine(KillAnimal());
+        }
     }
 
     public void AddDamage(float damage)
@@ -131,6 +146,7 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
             Vector3 suitable_spawning_location = FindSuitableSpawningLocation();
             //GameObject child = Instantiate(gameObject, suitable_spawning_location, Quaternion.identity);
             Instantiate(child, suitable_spawning_location, Quaternion.identity);
+            animalAnimation.SetAnimation(AnimationParameters.isLove);
         }
         catch (NoSuitableSpawnLocationFound)
         {
@@ -157,5 +173,12 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
             }
         }
         throw (new NoSuitableSpawnLocationFound("No suitable spawn location found."));
+    }
+
+    IEnumerator KillAnimal()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(this.gameObject);
+        yield return null;
     }
 }

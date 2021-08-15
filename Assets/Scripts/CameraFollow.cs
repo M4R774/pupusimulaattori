@@ -46,9 +46,14 @@ public class CameraFollow : MonoBehaviour
                 camera.gameObject.transform.localPosition = origTransform.position;
             }
 
-            if(hasTarget)
+            if(hasTarget && target != null)
             {
                 camera.gameObject.transform.localPosition = target.position + new Vector3(0,2.5f,-2.5f);
+            }
+            else if(hasTarget && target == null)
+            {
+                hasTarget = false;
+                camera.gameObject.transform.localPosition = origTransform.position;
             }
         }
     }

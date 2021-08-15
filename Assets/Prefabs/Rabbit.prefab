@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 7398106452895305391}
   - component: {fileID: 947760489943254389}
   - component: {fileID: 2082764076844534259}
+  - component: {fileID: 4963023780662011561}
   m_Layer: 6
   m_Name: Rabbit
   m_TagString: Animal
@@ -357,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11085f3ba98b92e4284740203cdd2b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animalHealth: 100
   health_bar: {fileID: 5264213836163371428}
   max_energy_storages: 100
   energy_storages: 100
@@ -364,10 +366,11 @@ MonoBehaviour:
   hunger_drain_interval: 1
   vision_range: 15
   child: {fileID: 1609694806902386004}
-  reproductionInterval: 45
+  reproductionInterval: 15
   movement_target: {x: 0, y: 0, z: 0}
   jump_strength: 3
   jump_cooldown: 0
+  animalAnimation: {fileID: 4963023780662011561}
 --- !u!114 &947760489943254389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,8 +386,7 @@ MonoBehaviour:
   isPredator: 0
   animal: {fileID: 0}
   status: 0
-  animator: {fileID: 0}
-  currentAnimation: 
+  animalAnimation: {fileID: 4963023780662011561}
 --- !u!114 &2082764076844534259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +403,20 @@ MonoBehaviour:
   health: 100
   nutrition: 0
   next_growth_time: 0
+--- !u!114 &4963023780662011561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609694806902386004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea54158db8f83c459987c3a87d0aa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4157638494748227782}
+  currentAnimation: 
 --- !u!1 &2358881940886419392
 GameObject:
   m_ObjectHideFlags: 0

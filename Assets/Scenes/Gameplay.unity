@@ -378,6 +378,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rabbit
       objectReference: {fileID: 0}
+    - target: {fileID: 1609694806902386004, guid: db69258fd730f134795cf8219c32abac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1793913442206144813, guid: db69258fd730f134795cf8219c32abac,
         type: 3}
       propertyPath: m_RootOrder
@@ -1026,6 +1031,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  scrollSensitivity: 10
+  shiftSpeedMultiplier: 5
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0

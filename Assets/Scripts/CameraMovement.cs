@@ -8,36 +8,56 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    [Space(10)]
+    [Header("How to: WASD, mouse wheel = y pos, shift = faster")]
     [SerializeField] float speed = 5f;
+    [SerializeField] float scrollSensitivity = 5;
+    [SerializeField] float shiftSpeedMultiplier = 5;
+    private float userShiftSpeed;
     private Vector3 moveDirection = Vector3.zero;
     private float inputX;
+    private float inputZ;
     private float inputY;
+    private bool inputShift;
+
+    void Start()
+    {
+        userShiftSpeed = shiftSpeedMultiplier;
+    }
     void Update()
     {
         inputX = Input.GetAxis("Horizontal");
-        inputY = Input.GetAxis("Vertical");
-        
+        inputZ = Input.GetAxis("Vertical");
+        inputY = Input.mouseScrollDelta.y;
+        inputShift = Input.GetKey(KeyCode.LeftShift);
+
         if (inputX != 0)
             moveHorizontal();
-        if (inputY != 0)
-            if(Input.GetKey(KeyCode.LeftShift))
-                moveVertical();
-            else
-                moveDepth();
+        if (inputZ != 0)
+            moveDepth();
+        if(inputY != 0)
+            moveVertical();
+        if(inputShift)
+            shiftSpeedMultiplier = userShiftSpeed;
+        else
+            shiftSpeedMultiplier = 1;
+
+        if(transform.position.y <= 0.5)
+            transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
  
     void moveHorizontal()
     {
-        transform.position += (new Vector3 (inputX * Time.deltaTime * speed, 0, 0));
+        transform.position += (new Vector3 (inputX * Time.deltaTime * speed * shiftSpeedMultiplier, 0, 0));
     }
  
     void moveDepth()
     {
-        transform.position += (new Vector3 (0, 0, inputY * Time.deltaTime * speed));
+        transform.position += (new Vector3 (0, 0, inputZ * Time.deltaTime * speed * shiftSpeedMultiplier));
     }
 
     void moveVertical()
     {
-        transform.position += (new Vector3 (0, inputY * Time.deltaTime * speed, 0));
+        transform.position += (new Vector3 (0, inputY * Time.deltaTime * speed * scrollSensitivity * shiftSpeedMultiplier, 0));
     }
 }

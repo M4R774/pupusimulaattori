@@ -5168,6 +5168,7 @@ GameObject:
   - component: {fileID: 5904621374386426136}
   - component: {fileID: 5904621374386426142}
   - component: {fileID: 5904621374386426143}
+  - component: {fileID: 8663425044915317180}
   m_Layer: 0
   m_Name: Fox
   m_TagString: Animal
@@ -5232,6 +5233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92137d55e28ea4479251a8ace35d18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animalHealth: 100
   health_bar: {fileID: 1056546738107100652}
   max_energy_storages: 100
   energy_storages: 100
@@ -5239,10 +5241,11 @@ MonoBehaviour:
   hunger_drain_interval: 1
   vision_range: 15
   child: {fileID: 5904621374386426140}
-  reproductionInterval: 60
+  reproductionInterval: 100
   movement_target: {x: 0, y: 0, z: 0}
   jump_strength: 3
   jump_cooldown: 0
+  animalAnimation: {fileID: 8663425044915317180}
 --- !u!114 &5904621374386426143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5258,7 +5261,20 @@ MonoBehaviour:
   isPredator: 1
   animal: {fileID: 5904621374386426142}
   status: 0
-  animator: {fileID: 0}
+  animalAnimation: {fileID: 8663425044915317180}
+--- !u!114 &8663425044915317180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5904621374386426140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea54158db8f83c459987c3a87d0aa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7669111864403115336}
   currentAnimation: 
 --- !u!1 &5904621374623266037
 GameObject:
