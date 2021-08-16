@@ -14,7 +14,7 @@ public class Plant : MonoBehaviour, IEdible, IKillable, IDamageable
     [SerializeField] float next_growth_time;
     [SerializeField] Animator animator;
 
-    // Reproduction
+    [Header("Reproduction")]
     private int reproduction_counter;
     private const int max_reproduction_count = 2;
     private float next_reproduction_time;

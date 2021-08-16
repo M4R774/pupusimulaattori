@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  max_nutrition: 30
   nutrition: 0
   next_growth_time: 0
   animator: {fileID: 7834537986192327108}
