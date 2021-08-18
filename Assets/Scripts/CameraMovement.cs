@@ -4,6 +4,7 @@ using UnityEngine;
 
 //
 // Simple camera movement. Left Shift to use vertical arrows as up + down
+// TO DO: Change camera movement to not use time - can be then used while game is pause & simulation speed doesn't affect it
 //
 
 public class CameraMovement : MonoBehaviour
