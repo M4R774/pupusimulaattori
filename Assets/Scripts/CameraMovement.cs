@@ -4,7 +4,6 @@ using UnityEngine;
 
 //
 // Simple camera movement. Left Shift to use vertical arrows as up + down
-// TO DO: Change camera movement to not use time - can be then used while game is pause & simulation speed doesn't affect it
 //
 
 public class CameraMovement : MonoBehaviour
@@ -27,8 +26,8 @@ public class CameraMovement : MonoBehaviour
     }
     void Update()
     {
-        inputX = Input.GetAxis("Horizontal");
-        inputZ = Input.GetAxis("Vertical");
+        inputX = Input.GetAxisRaw("Horizontal");
+        inputZ = Input.GetAxisRaw("Vertical");
         inputY = Input.mouseScrollDelta.y;
         inputShift = Input.GetKey(KeyCode.LeftShift);
 
@@ -49,16 +48,16 @@ public class CameraMovement : MonoBehaviour
  
     void moveHorizontal()
     {
-        transform.position += (new Vector3 (inputX * Time.deltaTime * speed * shiftSpeedMultiplier, 0, 0));
+        transform.position += (new Vector3 (inputX * 0.006f * speed * shiftSpeedMultiplier, 0, 0));
     }
  
     void moveDepth()
     {
-        transform.position += (new Vector3 (0, 0, inputZ * Time.deltaTime * speed * shiftSpeedMultiplier));
+        transform.position += (new Vector3 (0, 0, inputZ * 0.006f * speed * shiftSpeedMultiplier));
     }
 
     void moveVertical()
     {
-        transform.position += (new Vector3 (0, inputY * Time.deltaTime * speed * scrollSensitivity * shiftSpeedMultiplier, 0));
+        transform.position += (new Vector3 (0, inputY * 0.006f * speed * scrollSensitivity * shiftSpeedMultiplier, 0));
     }
 }
