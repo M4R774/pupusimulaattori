@@ -7,6 +7,12 @@ public class TerraintPaintReset : MonoBehaviour
 {
     Terrain terrain;
 
+    // TODO: Add new layers to the soil: 
+    // Layer 0: Base layer, gray, unfertile land. Nothing can grow here.
+    // Layer 1: Fertile land, grass can grow here
+    // Layer 2: Grass layer, grass will suck its power from the layer 1 (when grass grows, 
+    //   the fertility of the soil decreases.
+    // Other layers? Snow? Water?
 
     private void OnApplicationQuit()
     {
