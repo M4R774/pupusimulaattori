@@ -71,8 +71,11 @@ public class Plant : MonoBehaviour, IEdible, IKillable, IDamageable
 
     private void UpdateAnimator()
     {
-        float nutrition_percentage = nutrition / max_nutrition * 100;
-        animator.SetFloat("nutrition_percentage", nutrition_percentage);
+        if (animator != null && animator.isActiveAndEnabled)
+        {
+            float nutrition_percentage = nutrition / max_nutrition * 100;
+            animator.SetFloat("nutrition_percentage", nutrition_percentage);
+        }
     }
 
     public bool HasSomethingToEat()

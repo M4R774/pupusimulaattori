@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class TerraintPaintReset : MonoBehaviour
 {
     Terrain terrain;
-    // Start is called before the first frame update
+
+
+    private void OnApplicationQuit()
+    {
+        float[,,] map = new float[terrain.terrainData.alphamapWidth, terrain.terrainData.alphamapHeight, 2];
+        Fill(map, 1);
+    }
+
     void Awake()
     {
         terrain = GetComponent<Terrain>();
