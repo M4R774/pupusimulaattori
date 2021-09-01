@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class Plant : MonoBehaviour, IEdible, IKillable, IDamageable
 {
     public const int id = 0;
-    [SerializeField] float health;
+    [SerializeField] protected float health;
     const float max_nutrition = 100;
     [SerializeField] float nutrition;
     const float growth_interval = 2;
@@ -15,9 +15,9 @@ public class Plant : MonoBehaviour, IEdible, IKillable, IDamageable
     [SerializeField] Animator animator;
 
     [Header("Reproduction")]
-    private int reproduction_counter;
-    private const int max_reproduction_count = 2;
-    private float next_reproduction_time;
+    protected int reproduction_counter;
+    protected const int max_reproduction_count = 2;
+    protected float next_reproduction_time;
     private const float reproduction_interval = 60;
 
     void Awake()
@@ -28,20 +28,19 @@ public class Plant : MonoBehaviour, IEdible, IKillable, IDamageable
         next_growth_time = growth_interval + UnityEngine.Random.Range(-growth_interval, growth_interval);
 
         RaycastHit hit;
+        // Shoot a ray from 100 units up, in case object is under the terrain
         Ray ray = new Ray (transform.position + Vector3.up * 100, Vector3.down);
         LayerMask mask = 1 << 8;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {        
             if (hit.collider != null)
             {
-                // this is where the gameobject is actually put on the ground
                 transform.position = new Vector3 (transform.position.x, hit.point.y, transform.position.z);
-                Debug.Log(hit.collider.gameObject.name);
             }
         }
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (nutrition < max_nutrition && Time.time > next_growth_time)
         {
@@ -119,7 +118,7 @@ public class Plant : MonoBehaviour, IEdible, IKillable, IDamageable
         return nutrition;
     }
 
-    private void Reproduce()
+    protected void Reproduce()
     {
         try
         {

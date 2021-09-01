@@ -16,8 +16,8 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     [SerializeField] private float hunger_drain_interval = 10;
     public float vision_range = 10;
     private float time_for_hunger_decrease;
-    [SerializeField] GameObject child; // Prefab to instantiate
-    [SerializeField] int reproductionInterval = 60; // Time between reproduction made avalaible in editor
+    [SerializeField] GameObject child;
+    [SerializeField] int reproductionInterval = 60; 
     private Coroutine deathCoroutine = null;
 
     [Header("Movement variables")]
@@ -60,7 +60,6 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
             time_for_hunger_decrease = Time.time + hunger_drain_interval;
             Consume(1);
         }
-
         if (GetFoodSaturationPercentage() > 95 && Time.time > next_reproduction_time)
         {
             Reproduce();
