@@ -26,6 +26,19 @@ public class Plant : MonoBehaviour, IEdible, IKillable, IDamageable
         reproduction_counter = 0;
         next_reproduction_time = Time.time + 10;
         next_growth_time = growth_interval + UnityEngine.Random.Range(-growth_interval, growth_interval);
+
+        RaycastHit hit;
+        Ray ray = new Ray (transform.position + Vector3.up * 100, Vector3.down);
+        LayerMask mask = 1 << 8;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+        {        
+            if (hit.collider != null)
+            {
+                // this is where the gameobject is actually put on the ground
+                transform.position = new Vector3 (transform.position.x, hit.point.y, transform.position.z);
+                Debug.Log(hit.collider.gameObject.name);
+            }
+        }
     }
 
     void FixedUpdate()

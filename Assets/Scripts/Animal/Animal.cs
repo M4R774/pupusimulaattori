@@ -9,8 +9,9 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
     [SerializeField] private float animalHealth = 100;
     public float health {get; private set;} = 100; // This one gets eaten away by other animals
     [SerializeField] private Slider health_bar;
-    [SerializeField] private float max_energy_storages = 100;
-    [SerializeField] private float energy_storages = 100;
+    [SerializeField] protected float max_energy_storages = 100;
+    [SerializeField] protected float energy_storages = 100;
+    //public List<FoodType> foodTypesThatCanEat = new List<FoodType>(); // As rabbit in IEdible now, no need for this
     [SerializeField] private Slider hunger_bar;
     [SerializeField] private float hunger_drain_interval = 10;
     public float vision_range = 10;
@@ -29,6 +30,13 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
 
     [Header("Animation")]
     [SerializeField] AnimalAnimation animalAnimation;
+
+    /*public enum FoodType
+    {
+        grass,
+        rabbits,
+        foxes
+    }*/
 
     void Awake()
     {
@@ -150,7 +158,7 @@ public abstract class Animal : MonoBehaviour, IKillable, IDamageable, IHasHunger
         }
         catch (NoSuitableSpawnLocationFound)
         {
-
+            Debug.Log("Can't give birth here.");
         }
         next_reproduction_time = Time.time + reproductionInterval + UnityEngine.Random.Range(-5f, 5f);
     }

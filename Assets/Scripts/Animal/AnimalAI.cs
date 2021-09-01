@@ -7,9 +7,9 @@ public abstract class AnimalAI : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] protected Animal animal;
-    [SerializeField] Status status;
+    [SerializeField] protected Status status;
     [Header("Animation")]
-    [SerializeField] AnimalAnimation animalAnimation;
+    [SerializeField] protected AnimalAnimation animalAnimation;
 
     [Header("Idle movement")]
     private Rigidbody rb;
@@ -18,11 +18,10 @@ public abstract class AnimalAI : MonoBehaviour
     private float next_idle_movement_time;
 
     [Header("Food movement")]
-    private GameObject food_target;
-    private float next_food_movement_time;
-    private float food_consumption_on_movement = 1.2f;
-
-    enum Status
+    protected GameObject food_target;
+    protected float next_food_movement_time;
+    protected float food_consumption_on_movement = 1.2f;
+    protected enum Status
     {
         fleeing,
         eating,
@@ -146,7 +145,7 @@ public abstract class AnimalAI : MonoBehaviour
         return null;
     }
 
-    protected float CalculateFoodSourceAttractiviness(IEdible food_source)
+    private float CalculateFoodSourceAttractiviness(IEdible food_source)
     {
         float distance_to_food_source = Vector3.Distance(transform.position, food_source.GetPosition());
         return food_source.GetNutritionValue() - distance_to_food_source * food_consumption_on_movement;

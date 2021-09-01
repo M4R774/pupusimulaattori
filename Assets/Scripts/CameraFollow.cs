@@ -5,18 +5,18 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [Space(10)]
-    [Header("How to: Left mouse follow target, Right mouse free camera")]
+    [Header("How to: Left mouse follow target, Right mouse free cam")]
     [SerializeField] bool isActive;
-    [SerializeField] Camera camera = null;
+    [SerializeField] Camera cam = null;
     bool hasTarget = false;
     [SerializeField] Transform target = null;
     Transform origTransform;
     
     void Start()
     {
-        if(camera != null)
+        if(cam != null)
         {
-            camera = Camera.main;
+            cam = Camera.main;
         }
         origTransform = this.transform;
     }
@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Mouse0))
             {
                 RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
                 
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -43,17 +43,17 @@ public class CameraFollow : MonoBehaviour
             {
                 target = null;
                 hasTarget = false;
-                camera.gameObject.transform.localPosition = origTransform.position;
+                cam.gameObject.transform.localPosition = origTransform.position;
             }
 
             if(hasTarget && target != null)
             {
-                camera.gameObject.transform.localPosition = target.position + new Vector3(0,2.5f,-2.5f);
+                cam.gameObject.transform.localPosition = target.position + new Vector3(0,2.5f,-2.5f);
             }
             else if(hasTarget && target == null)
             {
                 hasTarget = false;
-                camera.gameObject.transform.localPosition = origTransform.position;
+                cam.gameObject.transform.localPosition = origTransform.position;
             }
         }
     }

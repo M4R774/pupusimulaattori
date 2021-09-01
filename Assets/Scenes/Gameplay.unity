@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 330209396}
   - component: {fileID: 330209398}
   m_Layer: 5
-  m_Name: Simulation speed UI (1)
+  m_Name: Simulation speed UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 373046952}
   - component: {fileID: 373046955}
   - component: {fileID: 373046956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373046951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.05, z: 0}
+  m_LocalPosition: {x: 0, y: -4.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1339,6 +1339,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3956723444106335287, guid: 04e5be1bb8d886747b97508e3b9e2e05,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8725357981914154526, guid: 04e5be1bb8d886747b97508e3b9e2e05,
         type: 3}
       propertyPath: m_Layer
@@ -1482,6 +1487,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904621374386426140, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6864303850295174501, guid: 12cfa1a7e1ca6ae4db030344ced18bca,
         type: 3}
@@ -1649,7 +1659,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.34070775, y: 0, z: 0, w: 0.94016933}
-  m_LocalPosition: {x: 500, y: 14.5, z: 480}
+  m_LocalPosition: {x: 495.9, y: 21.35, z: 486.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1683,7 +1693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  camera: {fileID: 963194227}
+  cam: {fileID: 963194227}
   target: {fileID: 0}
 --- !u!1 &995544175
 GameObject:
@@ -2056,7 +2066,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5058478338354825618, guid: d5508066177729946b7aa09b32231c14,
+  m_Sprite: {fileID: 7494671180053651526, guid: d5508066177729946b7aa09b32231c14,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -2295,7 +2305,7 @@ PrefabInstance:
     - target: {fileID: 897985538825967800, guid: 8ea1201906acab749a8b0f5a874e02c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.79
+      value: 10.19
       objectReference: {fileID: 0}
     - target: {fileID: 897985538825967800, guid: 8ea1201906acab749a8b0f5a874e02c2,
         type: 3}
@@ -2337,6 +2347,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897985538825967802, guid: 8ea1201906acab749a8b0f5a874e02c2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 897985538825967803, guid: 8ea1201906acab749a8b0f5a874e02c2,
         type: 3}
       propertyPath: m_Name
@@ -2356,7 +2371,7 @@ GameObject:
   - component: {fileID: 1951583213}
   - component: {fileID: 1951583212}
   m_Layer: 5
-  m_Name: Simulation speed UI
+  m_Name: Simulation speed controls UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

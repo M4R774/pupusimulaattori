@@ -5237,6 +5237,7 @@ MonoBehaviour:
   health_bar: {fileID: 1056546738107100652}
   max_energy_storages: 100
   energy_storages: 100
+  foodTypesThatCanEat: 01000000
   hunger_bar: {fileID: 8228583762393489567}
   hunger_drain_interval: 1
   vision_range: 15
@@ -5258,7 +5259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3d936128b29ca4593a63f760895585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPredator: 1
   animal: {fileID: 5904621374386426142}
   status: 0
   animalAnimation: {fileID: 8663425044915317180}
