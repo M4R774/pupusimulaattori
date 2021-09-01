@@ -6,8 +6,7 @@ using System.Collections.Generic;
 public abstract class AnimalAI : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] bool isPredator; // Attempt to make this script usable for foxes as well
-    [SerializeField] Animal animal;
+    [SerializeField] protected Animal animal;
     [SerializeField] Status status;
     [Header("Animation")]
     [SerializeField] AnimalAnimation animalAnimation;
@@ -131,11 +130,9 @@ public abstract class AnimalAI : MonoBehaviour
         }
     }
 
-    private GameObject GetNearbyFoodSource()
+    protected virtual GameObject GetNearbyFoodSource()
     {
         int layer_mask = 1 << 3;  // Layer 3 = Edibles
-        if(isPredator)
-            layer_mask = 1 << 6; // Layer 3 = Animal
         Collider[] edibles_in_vision_range = Physics.OverlapSphere(transform.position, animal.vision_range, layer_mask, QueryTriggerInteraction.Collide);
         List<Collider> sorted_edibles_list = edibles_in_vision_range.OrderByDescending(edible => CalculateFoodSourceAttractiviness(edible.GetComponent<IEdible>())).ToList();
         foreach (Collider edible_collider in sorted_edibles_list)
@@ -149,7 +146,7 @@ public abstract class AnimalAI : MonoBehaviour
         return null;
     }
 
-    private float CalculateFoodSourceAttractiviness(IEdible food_source)
+    protected float CalculateFoodSourceAttractiviness(IEdible food_source)
     {
         float distance_to_food_source = Vector3.Distance(transform.position, food_source.GetPosition());
         return food_source.GetNutritionValue() - distance_to_food_source * food_consumption_on_movement;
