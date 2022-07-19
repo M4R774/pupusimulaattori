@@ -1,2 +1,1 @@
-# haka49
-Repository for LudumDare49 GameJam event. 
+Small test to simulate how rabbits reproduce and eat grass. 
